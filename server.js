@@ -8,7 +8,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const PORT = process.env.PORT || 3000;
-const DIRECT_LINE_SECRET = process.env.DIRECT_LINE_SECRET; // <-- guarda aquí tu secreto
+const DIRECT_LINE_SECRET = process.env.4nN1hSC0YEYTXNxqZfhbOqMPfqpv3k6TaRskl4NbyCl55Pk6mVSpJQQJ99BJAC4f1cMAArohAAABAZBS2MtI; // <-- guarda aquí tu secreto
 
 if (!DIRECT_LINE_SECRET) {
   console.error("ERROR: define DIRECT_LINE_SECRET en tus variables de entorno.");
