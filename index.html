@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MineBot - Tu Asistente de Minecraft</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Variables de Color (Tema Minecraft) --- */
+        :root {
+            --color-dirt-dark: #583822;
+            --color-dirt-border: #3B2717;
+            --color-stone-light: #C6C6C6;
+            --color-stone-dark: #5A5A5A;
+            --color-grass-green: #4CAF50;
+            --color-grass-border: #388E3C;
+            --color-sky-blue: #A9D7E8;
+            --color-text-dark: #222;
+            --color-text-light: #FFF;
+        }
+
+        /* --- Estilos Globales --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'VT323', monospace; /* Fuente pixelada */
+            font-size: 18px;
+            color: var(--color-text-light);
+
+            /* --- CAMBIO PARA IMAGEN DE FONDO --- */
+            /* !! RECUERDA CAMBIAR ESTA IMAGEN !! */
+            background-image: url('tu-imagen-de-fondo.jpg'); 
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-attachment: fixed; 
+        }
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: var(--color-stone-light); /* Fondo de piedra claro */
+            border: 4px solid var(--color-stone-dark);
+            padding: 15px;
+            color: var(--color-text-dark);
+            box-shadow: 0 0 0 4px var(--color-dirt-border);
+        }
+
+        /* --- Encabezado --- */
+        header {
+            text-align: center;
+            padding: 20px;
+            
+            /* --- CAMBIO PARA IMAGEN DE HEADER --- */
+            /* !! RECUERDA CAMBIAR ESTA IMAGEN !! */
+            background-image: url('tu-imagen-para-el-header.jpg');
+            background-size: cover;
+            background-position: center;
+
+            border-bottom: 4px solid var(--color-dirt-border);
+            color: var(--color-text-light);
+            text-shadow: 2px 2px #000; /* Añadido para que el texto se lea mejor sobre una imagen */
+        }
+
+        header h1 {
+            font-size: 3.5em;
+        }
+
+        .green-text {
+            color: var(--color-grass-green);
+        }
+
+        header p {
+            font-size: 1.2em;
+        }
+
+        /* --- Contenido Intro --- */
+        .intro {
+            text-align: center;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* --- Contenedor del Chat --- */
+        #chat-container {
+            background-color: var(--color-stone-light);
+            border: 4px solid var(--color-stone-dark);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- Caja de Mensajes --- */
+        #chat-box {
+            height: 350px;
+            overflow-y: auto; /* Scroll si hay muchos mensajes */
+            padding: 10px;
+            background-color: #DCDCDC; /* Gris más claro para el fondo del chat */
+            border-bottom: 4px solid var(--color-stone-dark);
+            border-top: 2px solid var(--color-stone-dark);
+            border-left: 2px solid var(--color-stone-dark);
+            border-right: 2px solid #FFF;
+            border-bottom: 2px solid #FFF;
+        }
+
+        .message {
+            margin-bottom: 12px;
+            padding: 10px;
+            border: 2px solid var(--color-stone-dark);
+        }
+
+        .user-message {
+            background-color: var(--color-sky-blue); /* Mensaje de usuario en azul cielo */
+            color: var(--color-text-dark);
+            text-align: right;
+            border-color: #6e98aa;
+        }
+
+        .bot-message {
+            background-color: #EFEFEF; /* Mensaje del bot en gris claro */
+            color: var(--color-text-dark);
+            text-align: left;
+        }
+
+        /* --- Área de Entrada --- */
+        #input-area {
+            display: flex;
+            padding: 10px;
+            background-color: var(--color-stone-light);
+        }
+
+        #user-input {
+            flex-grow: 1; /* Ocupa el espacio disponible */
+            padding: 10px;
+            border: 2px solid var(--color-stone-dark);
+            font-family: 'VT323', monospace;
+            font-size: 1.1em;
+            border-radius: 0; /* Sin bordes redondeados */
+        }
+
+        #user-input:focus {
+            outline: 2px solid var(--color-sky-blue);
+        }
+
+        #send-btn {
+            padding: 10px 20px;
+            font-family: 'VT323', monospace;
+            font-size: 1.1em;
+            background-color: var(--color-grass-green);
+            color: var(--color-text-light);
+            border: 2px solid var(--color-grass-border);
+            border-radius: 0;
+            margin-left: 10px;
+            cursor: pointer;
+            text-shadow: 1px 1px var(--color-text-dark);
+        }
+
+        #send-btn:hover {
+            background-color: #5cb85c;
+        }
+
+        #send-btn:active {
+            background-color: var(--color-grass-border);
+            box-shadow: inset 0 0 5px #000;
+        }
+
+        /* --- Pie de Página --- */
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            padding: 15px;
+            font-size: 0.9em;
+            color: #FFF; /* Cambiado a blanco para que se lea sobre el fondo de imagen */
+            text-shadow: 1px 1px #000; /* Sombra para legibilidad */
+        }
+    </style>
+    </head>
+<body>
+
+    <header>
+        <h1><span class="green-text">Mine</span>Bot</h1>
+        <p>Tu ayudante experto en crafteos y biomas</p>
+    </header>
+
+    <main class="container">
+        <section class="intro">
+            <h2>¡Pregúntame lo que sea!</h2>
+            <p>
+                ¿No sabes cómo craftear un pistón? ¿Buscas el bioma de champiñones?
+                ¡Solo escríbelo abajo y te ayudaré!
+            </p>
+        </section>
+
+        <section id="chat-container">
+            <div id="chat-box">
+                <div class="message bot-message">
+                    <p>¡Hola! Soy MineBot. ¿En qué te puedo ayudar hoy?</p>
+                </div>
+            </div>
+            <div id="input-area">
+                <input type="text" id="user-input" placeholder="Escribe tu pregunta aquí...">
+                <button id="send-btn">Enviar</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>MineBot v1.0 - Creado con HTML, CSS y JS</p>
+    </footer>
+
+    <script>
+        // Espera a que todo el contenido de la página se cargue
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 1. Obtener los elementos del DOM
+            const chatBox = document.getElementById('chat-box');
+            const userInput = document.getElementById('user-input');
+            const sendBtn = document.getElementById('send-btn');
+
+            // 2. Añadir un "escuchador" de eventos al botón
+            sendBtn.addEventListener('click', sendMessage);
+
+            // 3. Añadir un "escuchador" para la tecla "Enter"
+            userInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+
+            // 4. Función para enviar el mensaje
+            function sendMessage() {
+                const userText = userInput.value.trim(); // Obtener el texto y limpiar espacios
+
+                if (userText === '') {
+                    return; // No enviar mensajes vacíos
+                }
+
+                // Añadir el mensaje del usuario al chat
+                addMessage(userText, 'user');
+
+                // Limpiar el campo de entrada
+                userInput.value = '';
+
+                // Simular una respuesta del bot después de 1 segundo
+                setTimeout(getBotResponse, 1000);
+            }
+
+            // 5. Función para añadir mensajes a la caja de chat
+            function addMessage(text, sender) {
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message', `${sender}-message`);
+                
+                const textElement = document.createElement('p');
+                textElement.innerText = text;
+                
+                messageElement.appendChild(textElement);
+                chatBox.appendChild(messageElement);
+
+                // Mover el scroll hasta el fondo
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+
+            // 6. Función (simulada) para obtener la respuesta del bot
+            function getBotResponse() {
+                // --- AQUÍ IRÍA TU LÓGICA DE IA ---
+                // Por ahora, solo damos una respuesta de ejemplo.
+                
+                const botText = "Estoy procesando tu pregunta... Por ahora, solo soy una demo. ¡Pero pronto sabré todo sobre Minecraft!";
+                
+                addMessage(botText, 'bot');
+            }
+
+        });
+    </script>
+    </body>
+</html>
