@@ -52,7 +52,7 @@ app.get("/", async (req, res) => {
 
     // 3) Reemplazar el placeholder s=YOUR_SECRET_HERE por s=<TOKEN>
     //    Buscamos exactamente la cadena YOUR_SECRET_HERE para no tocar otra cosa.
-    const placeholder = "s=YOUR_SECRET_HERE";
+    const placeholder = "4nN1hSC0YEYTXNxqZfhbOqMPfqpv3k6TaRskl4NbyCl55Pk6mVSpJQQJ99BJAC4f1cMAArohAAABAZBS2MtI";
     if (html.includes(placeholder)) {
       // Reemplazo seguro (escape token no necesario aquí porque es parte de URL)
       const newSrc = `s=${token}`;
@@ -60,7 +60,7 @@ app.get("/", async (req, res) => {
     } else {
       // Si no existe placeholder, intentamos buscar "s=YOUR_SECRET_HERE" dentro de iframe con comillas simples o dobles
       // Puedes ajustar según tu HTML real.
-      console.warn("Placeholder no encontrado en HTML. Asegúrate que el HTML contiene 's=YOUR_SECRET_HERE' dentro del iframe.");
+      console.warn("<iframe src='https://webchat.botframework.com/embed/MineBot-bot?s=4nN1hSC0YEYTXNxqZfhbOqMPfqpv3k6TaRskl4NbyCl55Pk6mVSpJQQJ99BJAC4f1cMAArohAAABAZBS2MtI'  style='min-width: 400px; width: 100%; min-height: 500px;'></iframe>");
     }
 
     // 4) Devolver HTML modificado al cliente (no se modifica el archivo en disco)
